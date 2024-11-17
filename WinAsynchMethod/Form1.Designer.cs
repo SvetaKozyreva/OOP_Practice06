@@ -54,6 +54,7 @@
             btnWork.TabIndex = 1;
             btnWork.Text = "Работа";
             btnWork.UseVisualStyleBackColor = true;
+            btnWork.Click += btnWork_Click;
             // 
             // lblB
             // 

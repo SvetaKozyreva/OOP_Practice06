@@ -13,15 +13,15 @@ namespace WinAsynchMethod
             try
             {
                 a = Int32.Parse(txbA.Text);
-                b = Int32.Parse(txbB.Text); 
+                b = Int32.Parse(txbB.Text);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("При выполнении преобразования типов возникла ошибка ");
                 txbA.Text = txbA.Text = "";
                 return;
             }
-            int result = await Task.Run(() => Summ(a,b));
+            int result = await Task.Run(() => Summ(a, b));
             CallBackMethod(result);
 
         }
@@ -35,6 +35,11 @@ namespace WinAsynchMethod
         {
             string str = String.Format("Сумма введенных чисел равна {0}", result);
             MessageBox.Show(str, "Результат операции");
+        }
+
+        private void btnWork_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Работа кипит");
         }
     }
 }
