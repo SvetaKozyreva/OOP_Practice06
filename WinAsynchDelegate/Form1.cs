@@ -7,10 +7,10 @@ namespace WinAsynchDelegate
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            TimeConsumingMethodDelegate del = new TimeConsumingMethodDelegate(TimeConsumingMethod);
-            del.BeginInvoke(int.Parse(textBox1.Text), null, null);
+            int seconds = int.Parse(textBox1.Text);
+            await Task.Run(() => TimeConsumingMethod(seconds));
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,10 +32,9 @@ namespace WinAsynchDelegate
                 Cancel = false;
             }
             else { System.Windows.Forms.MessageBox.Show("Complete"); }
-
         }
-        private delegate void TimeConsumingMethodDelegate(int seconds);
 
+        private delegate void TimeConsumingMethodDelegate(int seconds);
         public delegate void SetProgressDelegate(int val);
         public void SetProgress(int val)
         {

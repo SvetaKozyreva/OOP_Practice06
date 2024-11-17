@@ -7,7 +7,7 @@ namespace WinAsynchMethod
             InitializeComponent();
         }
 
-        private void btnRun_Click(object sender, EventArgs e)
+        private async void btnRun_Click(object sender, EventArgs e)
         {
             int a, b;
             try
@@ -21,9 +21,8 @@ namespace WinAsynchMethod
                 txbA.Text = txbA.Text = "";
                 return;
             }
-            AsyncSumm summdelegate = new AsyncSumm(Summ);
-            AsyncCallback cb = new AsyncCallback(CallBackMethod);
-            summdelegate.BeginInvoke(a, b, cb, summdelegate);
+            int result = await Task.Run(() => Summ(a,b));
+            CallBackMethod(result);
 
         }
         private delegate int AsyncSumm(int a, int b);
@@ -32,11 +31,9 @@ namespace WinAsynchMethod
             System.Threading.Thread.Sleep(9000);
             return a + b;
         }
-        private void CallBackMethod(IAsyncResult ar)
+        private void CallBackMethod(int result)
         {
-            string str;
-            AsyncSumm summdelegate = (AsyncSumm)ar.AsyncState;
-            str = String.Format("Сумма введенных чисел равна {0}", summdelegate.EndInvoke(ar));
+            string str = String.Format("Сумма введенных чисел равна {0}", result);
             MessageBox.Show(str, "Результат операции");
         }
     }
