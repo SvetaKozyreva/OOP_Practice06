@@ -80,6 +80,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(80, 27);
             textBox1.TabIndex = 4;
+            textBox1.KeyPress += textBox1_KeyPress;
             // 
             // progressBar1
             // 
